@@ -19,7 +19,6 @@ public class Voiture extends Observable {
 	public void miseAJourPosition() {
 		miseAJourPositionX();
         miseAJourPositionY();
-        System.out.println(" x : " + x + " y : " + y + " angle : " + directionEnDegres);
 		notificationObservateur();
 	}
 
