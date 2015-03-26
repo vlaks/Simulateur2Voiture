@@ -9,29 +9,60 @@ public class Voiture extends Observable {
 	private int vitesseMetreSeconde;
 	private int directionEnDegres;
 
-	public Voiture(int x, int y, int vitesse) {
+	public Voiture(int x, int y, int direction,int vitesse) {
 		this.x = x;
 		this.y = y;
 		this.vitesseMetreSeconde = vitesse;
-		this.directionEnDegres = 0;
+		this.directionEnDegres = direction;
 	}
 
 	public void miseAJourPosition() {
 		miseAJourPositionX();
+        miseAJourPositionY();
+        System.out.println(" x : " + x + " y : " + y + " angle : " + directionEnDegres);
 		notificationObservateur();
 	}
 
 	private void miseAJourPositionX() {
-		if (directionEnDegres == 0)
-			x += vitesseMetreSeconde;
-		else
-			x -= vitesseMetreSeconde;
-		
-		if (x > 1000)
-			x = 1000;
-		else if (x < 0)
-			x = 0;
-	}
+        if (directionEnDegres == 0)
+            x += vitesseMetreSeconde;
+        else if(directionEnDegres == 90) {
+            x=x;
+        }
+        else if(directionEnDegres == 270) {
+            x=x;
+        }
+        else if(directionEnDegres == 180) {
+            x -= vitesseMetreSeconde;
+        }
+        else{
+            double angleRadian = (Math.PI * directionEnDegres)/180;
+            x += (int) (Math.cos(angleRadian) * vitesseMetreSeconde);
+        }
+
+        if (x > 1000)
+            x = 1000;
+        else if (x < 0)
+            x = 0;
+    }
+
+    private void miseAJourPositionY() {
+        if (directionEnDegres == 90)
+            y += vitesseMetreSeconde;
+        else if(directionEnDegres == 0) {
+            y=y;
+        }
+        else if(directionEnDegres == 180) {
+            y=y;
+        }
+        else if(directionEnDegres == 270) {
+            y -= vitesseMetreSeconde;
+        }
+        else {
+            double angleRadian = (Math.PI * directionEnDegres)/180;
+            y += (int) (Math.sin(angleRadian) * vitesseMetreSeconde);
+        }
+    }
 
 	private void notificationObservateur() {
 		this.setChanged();
@@ -41,6 +72,10 @@ public class Voiture extends Observable {
 	public int getX() {
 		return x;
 	}
+
+    public int getY() {
+        return y;
+    }
 
 	public void accelerer() {
 		if (vitesseMetreSeconde < 100)
@@ -59,6 +94,16 @@ public class Voiture extends Observable {
 		this.directionEnDegres = angleDirection;
 		
 	}
+
+    public void tournerDroite(){
+        directionEnDegres += 10;
+        directionEnDegres = directionEnDegres % 360;
+    }
+
+    public void tournerGauche(){
+        directionEnDegres -= 10;
+        directionEnDegres = directionEnDegres % 360;
+    }
 
 	public void inverserDirection() {
 		directionEnDegres +=180 ;

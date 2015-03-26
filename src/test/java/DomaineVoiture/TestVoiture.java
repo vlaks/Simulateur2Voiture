@@ -12,7 +12,7 @@ public class TestVoiture {
 	
 	@Before
 	public void setUp(){
-		maVoiture = new Voiture (100, 0, 10);
+		maVoiture = new Voiture (100, 0,0,10);
 	}
 	
 	@Test
@@ -77,5 +77,32 @@ public class TestVoiture {
 		assertEquals(0, maVoiture.getX());
 		
 	}
+
+    @Test
+    public void  testEvolutionX2DenFonctionVitesseSurUnTopSeconde() {
+
+        Voiture voiture2 = new Voiture(0, 0, 0, 100);
+        voiture2.miseAJourPosition();
+
+        assertEquals(100, voiture2.getX());
+    }
+
+    @Test
+    public void testEvolutionY2DenFonctionVitesseSurUnTopSeconde() {
+        Voiture voiture2 = new Voiture(0, 0, 90, 100);
+        voiture2.miseAJourPosition();
+
+        assertEquals(0,voiture2.getX());
+        assertEquals(100, voiture2.getY());
+    }
+
+    @Test
+    public void testDirection(){
+        Voiture voiture2 = new Voiture(0, 0, 30, 100);
+        voiture2.miseAJourPosition();
+
+        assertEquals(86,voiture2.getX());
+        assertEquals(49,voiture2.getY());
+    }
 	
 }

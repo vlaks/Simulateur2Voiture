@@ -13,7 +13,7 @@ public class TestTriangle {
 	}
 	
 	@Test
-	public void testConversionMetresPixels() {
+	public void testConversionMetresPixelsX() {
 		
 		IHMVoiture monTriangle = new IHMVoiture();
 		
@@ -21,5 +21,15 @@ public class TestTriangle {
 		
 		assertEquals(55, xPixels);
 	}
+
+    @Test
+    public void testConversionMetresPixelsY() {
+        IHMVoiture monTriangle2 = new IHMVoiture();
+
+        int yPixels = monTriangle2.calculerPositionPixels(100);
+
+        assertEquals(50, yPixels);
+    }
+
 
 }
