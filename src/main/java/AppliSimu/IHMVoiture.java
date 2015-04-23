@@ -1,9 +1,6 @@
 package AppliSimu;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Panel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -58,6 +55,7 @@ public class IHMVoiture extends JFrame implements Observer{
 		super.paint(contexteGraphique);
 		contexteGraphique.setColor(Color.red);
 		dessinerVoiture(contexteGraphique);
+        dessinerEtiquettePermis(contexteGraphique);
 	}
 
 
@@ -68,5 +66,18 @@ public class IHMVoiture extends JFrame implements Observer{
         int yPixel = calculerPositionPixels(yMetres);
 		contexteGraphique.fillRect(xPixel, yPixel, 30, 15);
 	}
+
+
+    private void dessinerEtiquettePermis(Graphics contexteGraphique) {
+        int pointsPermis = maVoiture.getPointsPermis();
+        Font fontPermis = new Font("Verdana", Font.BOLD, 18);
+        contexteGraphique.setColor(Color.LIGHT_GRAY);
+        contexteGraphique.fillRect(300, 420, 200, 80);
+        contexteGraphique.setColor(Color.BLACK);
+        contexteGraphique.drawString("Points de permis", 355, 450);
+        contexteGraphique.setFont(fontPermis);
+        contexteGraphique.drawString(Integer.toString(pointsPermis),390,480);
+
+    }
 	
 }
